@@ -11,14 +11,14 @@ export default {
     props: {
         href: String,
         target: null,
-        mode: 'list',
+        mode: 'list'
     },
 
     data: {
         href: false,
         target: false,
         mode: 'click',
-        queued: true,
+        queued: true
     },
 
     computed: {
@@ -64,7 +64,7 @@ export default {
 
                 // TODO better isToggled handling
                 let link;
-                if (closest(e.target, 'a[href="#"], a[href=""], button')
+                if (closest(e.target, 'a[href="#"], a[href=""]')
                     || (link = closest(e.target, 'a[href]')) && (
                         this.cls
                         || !isVisible(this.target)
