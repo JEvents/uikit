@@ -1,5 +1,5 @@
 import {getComponentName} from './component';
-import {fastdom, hasAttr} from 'uikit-util';
+import {apply, fastdom, hasAttr} from 'uikit-util';
 
 export default function (UIkit) {
 
@@ -9,28 +9,13 @@ export default function (UIkit) {
         return;
     }
 
-    if (document.body) {
-
-        init();
-
-    } else {
-
-        (new MutationObserver(function () {
-
-            if (document.body) {
-                this.disconnect();
-                init();
-            }
-
-        })).observe(document, {childList: true, subtree: true});
-
-    }
+    fastdom.read(init);
 
     function init() {
 
-        apply(document.body, connect);
-
-        fastdom.flush();
+        if (document.body) {
+            apply(document.body, connect);
+        }
 
         (new MutationObserver(mutations => mutations.forEach(applyMutation))).observe(document, {
             childList: true,
@@ -91,21 +76,6 @@ export default function (UIkit) {
         }
 
         return true;
-    }
-
-    function apply(node, fn) {
-
-        if (node.nodeType !== 1 || hasAttr(node, 'uk-no-boot')) {
-            return;
-        }
-
-        fn(node);
-        node = node.firstElementChild;
-        while (node) {
-            const next = node.nextElementSibling;
-            apply(node, fn);
-            node = next;
-        }
     }
 
 }

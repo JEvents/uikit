@@ -1,4 +1,4 @@
-import {css, fastdom, getEventPos, isTouch, on, once, pointerDown, pointerUp, ready, toMs, trigger} from 'uikit-util';
+import {css, fastdom, getEventPos, isTouch, on, once, pointerCancel, pointerDown, pointerUp, ready, toMs, trigger} from 'uikit-util';
 
 export default function (UIkit) {
 
@@ -18,8 +18,7 @@ export default function (UIkit) {
             pending = true;
             fastdom.write(() => pending = false);
 
-            const {target} = e;
-            UIkit.update(target.nodeType !== 1 ? document.body : target, e.type);
+            UIkit.update(null, e.type);
 
         }, {passive: true, capture: true});
 
@@ -46,9 +45,10 @@ export default function (UIkit) {
                 return;
             }
 
+            // Handle Swipe Gesture
             const pos = getEventPos(e);
             const target = 'tagName' in e.target ? e.target : e.target.parentNode;
-            off = once(document, pointerUp, e => {
+            off = once(document, `${pointerUp} ${pointerCancel}`, e => {
 
                 const {x, y} = getEventPos(e);
 
@@ -63,6 +63,17 @@ export default function (UIkit) {
                 }
 
             });
+
+            // Force click event anywhere on iOS < 13
+            if (pointerDown === 'touchstart') {
+                css(document.body, 'cursor', 'pointer');
+                once(document, `${pointerUp} ${pointerCancel}`, () =>
+                    setTimeout(() =>
+                        css(document.body, 'cursor', '')
+                    , 50)
+                );
+            }
+
         }, {passive: true});
 
     });

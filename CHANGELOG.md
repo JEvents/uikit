@@ -1,5 +1,156 @@
 # Changelog
 
+## 3.2.6 (December 17, 2019)
+
+### Fixed
+
+- Fix regression with custom icons build task
+
+## 3.2.5 (December 17, 2019)
+
+### Added
+
+- Prevent content overflow if `max-width: 100%` is used inside Position component
+- Add `parent` util function
+- Add `children` util function
+- Add `isElement` util function
+
+### Fixed
+
+- Accordion component triggers scroll on page load
+- Fix regression in Scroll component in Edge and IE
+
+## 3.2.4 (December 3, 2019)
+
+### Added
+
+- Parallax, Scroll, Scrollspy Nav components work inside of scrollable container
+- Expose `scrollIntoView` utility function
+
+### Fixed
+
+- Fix scrolling containers while dragging in Sortable component
+- Fix show/hide behaviour in Drop component 
+- Fix Accordion component will scroll title into view if needed
+- Fix component initialization without element
+
+## 3.2.3 (November 6, 2019)
+
+### Fixed
+
+- Fix initializing components with jQuery elements
+
+## 3.2.2 (October 23, 2019)
+
+### Added
+
+- Prevent endless update loops
+
+### Changed
+
+- Improve event.preventDefault behaviour in Toggle component
+- Improve initial boot
+
+### Fixed
+
+- Fix event delegation with `self` filter
+
+## 3.2.1 (October 1, 2019)
+
+### Added
+
+- Add support for `input type="submit"` to Button component
+- Add `selSlides` option to Slider/Slideshow component
+
+### Fixed
+
+- Fix Slider throws error if initialized with no slides
+- Fix Slider/Slideshow crash in IE
+- Fix Slider/Slideshow drag no longer starts on input elements
+- Fix Slider/Slideshow Parallax shows wrong initial state
+- Fix `isPlainObject` to work across iframes
+- Fix Scrollspy causes endless update loop
+
+## 3.2.0 (September 5, 2019)
+
+### Added
+
+- Add column and row gutter to Grid component
+
+### Removed
+
+- Remove `@text-bold-font-weight` variable
+
+### Fixed
+
+- Fix countdown line-height on small devices
+
+## 3.1.9 (September 2, 2019)
+
+### Added
+
+- Add `last` utility function
+
+### Fixed
+
+- Fix Slideshow invisible after switching tabs in Switcher
+- Fix lazy loading images in Img component in UC Browser
+- Fix opening Offcanvas/Modal through buttons
+
+## 3.1.8 (August 29, 2019)
+
+### Added
+
+- Add font weight and style modifier
+- Add `self` option to `on` function
+
+### Changed
+
+- Improve `padding-bottom` calculation for Grid with `parallax: true`
+- Make `selMinHeight` in the Flex Bug mixin a prop
+
+### Fixed
+
+- Fix Modal close on bgClick behaviour
+- Fix spreading event args on delegated event listeners
+- Fix clicking an empty link within itself no longer closes the Drop
+- Fix IE 11 compatibility
+- Fix empty tooltips will no longer show
+
+## 3.1.7 (July 31, 2019)
+
+### Changed
+
+- By default the Offcanvas `container` option is `false` now
+- The `focusable` attribute on SVG/Icon component makes SVG focusable in IE
+
+### Fixed
+
+- Fix Slideshow/Slider triggering show events to often initially
+- Fix swipe gestures in Switcher component (Android)
+- Ensure at most one Height Viewport component set to `expand` is active
+- Height Viewport component no longer calculates its height if invisible
+- Fix using Sortable in scrolling container 
+- Fix lazy loading images if parent element is fully clipped
+- Fix clicking Slideshow with `draggable: false` no longer pauses autoplay
+- Fix toggling modal while transition is in progress
+- Fix Height Viewport component growing indefinitely if positioned above document
+- Fix Height Viewport component uses height with fractions
+- Fix Margin component for rows 1 pixel in height
+
+## 3.1.6 (June 19, 2019)
+
+### Added
+
+- Add style for input with datalist
+
+### Fixed
+
+- Fix image shrinking in centered and absolutely positioned navbars
+- Fix Custom Form not resetting on form `reset` event
+- Fix leader inverse hook
+- Fix divider vertical inverse hook
+
 ## 3.1.5 (May 17, 2019)
 
 ### Added

@@ -1,5 +1,5 @@
 import Togglable from '../mixin/togglable';
-import {$$, addClass, attr, data, endsWith, filter, getIndex, hasClass, index, isEmpty, matches, queryAll, removeClass, toNodes, within} from 'uikit-util';
+import {$$, addClass, attr, children, css, data, endsWith, filter, getIndex, index, isEmpty, matches, queryAll, removeClass, within} from 'uikit-util';
 
 export default {
 
@@ -49,7 +49,7 @@ export default {
 
             handler(e) {
                 e.preventDefault();
-                this.show(toNodes(this.$el.children).filter(el => within(e.current, el))[0]);
+                this.show(children(this.$el).filter(el => within(e.current, el))[0]);
             }
 
         },
@@ -95,12 +95,14 @@ export default {
         const {children} = this.$el;
         this.show(filter(children, `.${this.cls}`)[0] || children[this.active] || children[0]);
 
+        this.swiping && css(this.connects, 'touch-action', 'pan-y pinch-zoom');
+
     },
 
     methods: {
 
         index() {
-            return !isEmpty(this.connects) && index(filter(this.connects[0].children, `.${this.cls}`)[0]);
+            return !isEmpty(this.connects) ? index(filter(this.connects[0].children, `.${this.cls}`)[0]) : -1;
         },
 
         show(item) {
@@ -121,7 +123,7 @@ export default {
                 }
             }
 
-            if (!active || prev >= 0 && hasClass(active, this.cls) || prev === next) {
+            if (!active || prev === next) {
                 return;
             }
 
