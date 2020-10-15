@@ -180,7 +180,7 @@ export default {
             },
 
             handler(e) {
-                if (!isTouch(e) && !matches(this.$el, ':hover')) {
+                if (!isTouch(e) && e.relatedTarget) {
                     this.hide();
                 }
             }
